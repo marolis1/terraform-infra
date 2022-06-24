@@ -52,8 +52,12 @@ resource "aws_instance" "gitlab_runner1" {
   ami = "ami-0cff7528ff583bf9a"
   subnet_id = data.aws_subnet.sub1.id
   instance_type = "t2.medium"
+  associate_public_ip_address = true
+  key_name = "devops"
 
   vpc_security_group_ids = [ aws_security_group.allow_ssh.id ]
+
+  user_data = file("init.sh")
   tags = {
     Name: "${var.env}-runner1"
     project: var.project_tag

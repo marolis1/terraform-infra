@@ -1,2 +1,4 @@
 *.terraform*
 xOld*
+*.pem
+init.sh
